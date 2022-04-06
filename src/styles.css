@@ -7,16 +7,17 @@ body {
   }
   
   form {
-    max-width: 800px;
+    max-width: 600px;
     margin: 0 auto;
   }
   
   h1 {
     margin-top: 80px;
     font-weight: 100;
+    color: azure;
     text-align: center;
     padding-bottom: 10px;
-    border-bottom: 1px solid rgb(79, 98, 148);
+    border-bottom: 1px solid #bf1650;
   }
   
   .form {
@@ -41,8 +42,8 @@ body {
     width: 100%;
     border-radius: 4px;
     border: 1px solid white;
-    padding: 10px 15px;
-    margin-bottom: 10px;
+    padding: 10px 10px;
+    margin-top: 10px;
     font-size: 14px;
   }
   
@@ -53,19 +54,14 @@ body {
     border-radius: 4px;
     background-color: white;
     padding: 10px 15px;
-    margin-bottom: 10px;
+    margin-top: 10px;
     font-size: 14px;
-  }
-  
-  .IceCreamType {
-    color: black;
   }
   
   label {
     line-height: 2;
     text-align: left;
     display: block;
-    margin-bottom: 13px;
     margin-top: 20px;
     color: white;
     font-size: 14px;
@@ -131,11 +127,22 @@ body {
     font-weight: 400;
     background: white;
     color: black;
-    padding: 10px 15px;
+    padding: 10px 0px;
     border-radius: 4px;
     position: fixed;
     top: 20px;
     right: 20px;
+  }
+
+  .error {
+    color: red;
+    text-transform: lowercase;
+    border: none;
+    font-size: 16px;
+    font-weight: 100;
+    letter-spacing: 2px;
+    margin: 0;
+    padding: 0;
   }
 
   select {
@@ -144,8 +151,8 @@ body {
     width: 100%;
     border-radius: 4px;
     border: 1px solid white;
-    padding: 10px 15px;
-    margin-bottom: 10px;
+    padding: 10px 6px;
+    margin-top: 10px;
     font-size: 14px;
   }
   
