@@ -5,20 +5,20 @@ import "./styles.css";
 
 export default function App() {
   const { register, handleSubmit, unregister, formState: { errors } } = useForm();
+  const [dish, updateDish] = useState<string>('');
+  const errorMsg = {
+    req: 'this field is required',
+    num: 'should be grater than one minute'
+  }
   const onSubmit = handleSubmit((data) => {
     console.log('SUBMIT', data)
   });
 
-  const [selectedDishOptions, updateDish] = useState<string>('');
-  
-
   function returnOptions() {
-    console.log('selectedDishOptions', selectedDishOptions);
-
-    if(selectedDishOptions === 'Pizza') {
-      return (<input type="text" id="111" key="111" className="one" placeholder="Name2" {...register("Dish.Name1", {})} />)
+    if(dish === 'Pizza') {
+      return (<input type="text" placeholder="Name2" {...register("Dish.Name1", {})} />)
     } else {
-      return (<input type="text" id="222" key="222" className="two" placeholder="Name3" {...register("Dish.Name2", {})} />)
+      return (<input type="text" placeholder="Name3" {...register("Dish.Name2", {})} />)
     }
   }
 
@@ -29,14 +29,15 @@ export default function App() {
   
   return (
     <form onSubmit={onSubmit}>
-      <input type="text" placeholder="Name" {...register("Name", {required: 'error message'})} />
+      <input type="text" placeholder="Name" {...register("Name", {required: errorMsg.req})} />
       <input type="number" placeholder="preparation_time" {...register("preparation_time",
         { min: {
-          value: 3,
-          message: 'error message'
-        }
+          value: 1,
+          message: errorMsg.num
+        },
+        required: errorMsg.req
       })} />
-      <select {...register("type", {required: 'error message', onChange: (e) => onDishTypeChange(e.target.value)})}>
+      <select {...register("type", {required: errorMsg.req, onChange: (e) => onDishTypeChange(e.target.value)})}>
         <option value="">Select...</option>
         <option value="Pizza">Pizza</option>
         <option value="Soup">Soup</option>
