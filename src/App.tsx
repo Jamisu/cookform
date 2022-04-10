@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import "./styles.css";
 
 export default function App() {
-  const { register, handleSubmit, unregister, formState: { errors } } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm();
   const [dish, updateDish] = useState<string>('');
   const errorMsg = {
     req: 'this field is required',
@@ -50,7 +50,7 @@ export default function App() {
       misc.push(head)
       misc.push(<div>
           <input type="number" placeholder="spiciness_scale" {...register("spiciness_scale", {valueAsNumber: true, required: errorMsg.req})} />
-          {errors.spiciness_scale && <div className="error">{errors.spiciness_scale.message}</div>}
+          {errors.spiciness_scale && <div className="error">{errors.name.message}</div>}
         </div>)
     } else {
       return (null)
@@ -59,7 +59,6 @@ export default function App() {
   }
 
   function onDishTypeChange(targetValue:string) {
-  //  unregister("Dish");
     updateDish(targetValue);
   }
   
