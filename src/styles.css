@@ -19,6 +19,15 @@ body {
     padding-bottom: 10px;
     border-bottom: 1px solid #bf1650;
   }
+
+  h2 {
+    margin-top: 10px;
+    font-weight: 100;
+    color: azure;
+    text-align: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #bf1650;
+  }
   
   .form {
     background: #0e101c;
