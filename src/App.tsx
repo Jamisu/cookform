@@ -13,11 +13,10 @@ export default function App() {
 
   const onSubmit = handleSubmit((data) => {
     const postData = JSON.stringify(data)
-    
+
       const requestOptions = {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          // body: testData
           body: postData
       };
       fetch('https://frosty-wood-6558.getsandbox.com:443/dishes', requestOptions)
@@ -34,20 +33,24 @@ export default function App() {
     if(dish === 'sandwich') {
       misc.push(head)
       misc.push(<div>
-        <input type="text" placeholder="slices_of_bread" {...register("slices_of_bread", {valueAsNumber: true})} />
+        <input type="number" placeholder="slices_of_bread" {...register("slices_of_bread", {valueAsNumber: true, required: errorMsg.req})} />
+      {errors.slices_of_bread && <div className="error">{errors.slices_of_bread.message}</div>}
       </div>)
 
     } else if (dish === 'pizza') {
       misc.push(head)
       misc.push(<div>
-          <input type="number" placeholder="no_of_slices" {...register("no_of_slices", {valueAsNumber: true})} />
-          <input type="text" placeholder="diameter" {...register("diameter", {valueAsNumber: true})} />
+          <input type="number" placeholder="no_of_slices" {...register("no_of_slices", {valueAsNumber: true, required: errorMsg.req})} />
+      {errors.no_of_slices && <div className="error">{errors.no_of_slices.message}</div>}
+          <input type="number" placeholder="diameter" {...register("diameter", {valueAsNumber: true, required: errorMsg.req})} />
+      {errors.diameter && <div className="error">{errors.diameter.message}</div>}
         </div>)
       
     } else if (dish === 'soup'){
       misc.push(head)
       misc.push(<div>
-          <input type="text" placeholder="spiciness_scale" {...register("spiciness_scale", {valueAsNumber: true})} />
+          <input type="number" placeholder="spiciness_scale" {...register("spiciness_scale", {valueAsNumber: true, required: errorMsg.req})} />
+          {errors.spiciness_scale && <div className="error">{errors.spiciness_scale.message}</div>}
         </div>)
     } else {
       return (null)
@@ -68,14 +71,7 @@ export default function App() {
       <input type="text" placeholder="name" {...register("name", {required: errorMsg.req})} />
       {errors.name && <div className="error">{errors.name.message}</div>}
 
-      <input type="text" defaultValue="0" placeholder="preparation_time" {...register("preparation_time",
-      {
-        // { min: {
-        //   value: 1,
-        //   message: errorMsg.num
-        // },
-        required: errorMsg.req
-      })} />
+      <input type="time" step="1" placeholder="preparation_time" {...register("preparation_time", {required: errorMsg.req})} />
       {errors.preparation_time && <div className="error">{errors.preparation_time.message}</div>}
 
       <select placeholder="Dish" {...register("type", {required: errorMsg.req, onChange: (e) => onDishTypeChange(e.target.value)})}>
