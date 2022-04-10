@@ -10,13 +10,19 @@ export default function App() {
     req: 'this field is required',
     num: 'should be grater than zero'
   }
-  /* TYPES:
-error msg
-data - onSubmit
 
-  */
   const onSubmit = handleSubmit((data) => {
-    console.log('SUBMIT', data)
+    const postData = JSON.stringify(data)
+    
+      const requestOptions = {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          // body: testData
+          body: postData
+      };
+      fetch('https://frosty-wood-6558.getsandbox.com:443/dishes', requestOptions)
+          .then(response => response.json())
+          .then(ret_data => console.log("returnData", ret_data));
   });
 
   function returnOptions() {
@@ -25,23 +31,23 @@ data - onSubmit
                   {dish} Specs
                 </h2>
 
-    if(dish === 'Sandwich') {
+    if(dish === 'sandwich') {
       misc.push(head)
       misc.push(<div>
-        <input type="text" placeholder="slices_of_bread" {...register("Dish.slices_of_bread", {})} />
+        <input type="text" placeholder="slices_of_bread" {...register("slices_of_bread", {valueAsNumber: true})} />
       </div>)
 
-    } else if (dish === 'Pizza') {
+    } else if (dish === 'pizza') {
       misc.push(head)
       misc.push(<div>
-          <input type="text" placeholder="no_of_slices" {...register("Dish.no_of_slices", {})} />
-          <input type="text" placeholder="diameter" {...register("Dish.diameter", {})} />
+          <input type="number" placeholder="no_of_slices" {...register("no_of_slices", {valueAsNumber: true})} />
+          <input type="text" placeholder="diameter" {...register("diameter", {valueAsNumber: true})} />
         </div>)
       
-    } else if (dish === 'Soup'){
+    } else if (dish === 'soup'){
       misc.push(head)
       misc.push(<div>
-          <input type="text" placeholder="spiciness_scale" {...register("Dish.spiciness_scale", {})} />
+          <input type="text" placeholder="spiciness_scale" {...register("spiciness_scale", {valueAsNumber: true})} />
         </div>)
     } else {
       return (null)
@@ -50,7 +56,7 @@ data - onSubmit
   }
 
   function onDishTypeChange(targetValue:string) {
-    unregister("Dish");
+  //  unregister("Dish");
     updateDish(targetValue);
   }
   
@@ -62,20 +68,21 @@ data - onSubmit
       <input type="text" placeholder="name" {...register("name", {required: errorMsg.req})} />
       {errors.name && <div className="error">{errors.name.message}</div>}
 
-      <input type="number" defaultValue="0" placeholder="preparation_time" {...register("preparation_time",
-        { min: {
-          value: 1,
-          message: errorMsg.num
-        },
+      <input type="text" defaultValue="0" placeholder="preparation_time" {...register("preparation_time",
+      {
+        // { min: {
+        //   value: 1,
+        //   message: errorMsg.num
+        // },
         required: errorMsg.req
       })} />
       {errors.preparation_time && <div className="error">{errors.preparation_time.message}</div>}
 
       <select placeholder="Dish" {...register("type", {required: errorMsg.req, onChange: (e) => onDishTypeChange(e.target.value)})}>
         <option selected disabled hidden>Dish type...</option>
-        <option value="Pizza">Pizza</option>
-        <option value="Soup">Soup</option>
-        <option value="Sandwich">Sandwich</option>
+        <option value="pizza">Pizza</option>
+        <option value="soup">Soup</option>
+        <option value="sandwich">Sandwich</option>
       </select>
 
       {returnOptions()}
